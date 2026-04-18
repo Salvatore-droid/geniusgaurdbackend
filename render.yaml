@@ -6,10 +6,10 @@ services:
     buildCommand: |
       pip install -r requirements.txt
       python manage.py migrate
-    startCommand: gunicorn yourproject.wsgi:application --bind 0.0.0.0:$PORT
+    startCommand: gunicorn geniusgaurd.wsgi:application --bind 0.0.0.0:$PORT
     envVars:
       - key: DJANGO_SETTINGS_MODULE
-        value: yourproject.settings
+        value: geniusgaurd.settings
       - key: REDIS_URL
         fromService:
           name: geniusguard-redis
@@ -21,7 +21,7 @@ services:
     name: geniusguard-worker
     runtime: python
     buildCommand: pip install -r requirements.txt
-    startCommand: celery -A yourproject worker --loglevel=info
+    startCommand: celery -A geniusgaurd worker --loglevel=info
     envVars:
       - key: REDIS_URL
         fromService:
@@ -34,7 +34,7 @@ services:
     name: geniusguard-beat
     runtime: python
     buildCommand: pip install -r requirements.txt
-    startCommand: celery -A yourproject beat --loglevel=info
+    startCommand: celery -A geniusgaurd beat --loglevel=info
     envVars:
       - key: REDIS_URL
         fromService:
