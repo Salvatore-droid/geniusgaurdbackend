@@ -1,0 +1,48 @@
+services:
+  # Django API Server
+  - type: web
+    name: geniusguard-api
+    runtime: python
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py migrate
+    startCommand: gunicorn yourproject.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: yourproject.settings
+      - key: REDIS_URL
+        fromService:
+          name: geniusguard-redis
+          type: redis
+          property: connectionString
+
+  # Celery Worker (processes tasks)
+  - type: worker
+    name: geniusguard-worker
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: celery -A yourproject worker --loglevel=info
+    envVars:
+      - key: REDIS_URL
+        fromService:
+          name: geniusguard-redis
+          type: redis
+          property: connectionString
+
+  # Celery Beat (scheduled tasks)
+  - type: worker
+    name: geniusguard-beat
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: celery -A yourproject beat --loglevel=info
+    envVars:
+      - key: REDIS_URL
+        fromService:
+          name: geniusguard-redis
+          type: redis
+          property: connectionString
+
+  # Redis (message broker)
+  - type: redis
+    name: geniusguard-redis
+    plan: free  # Upgrade for production
