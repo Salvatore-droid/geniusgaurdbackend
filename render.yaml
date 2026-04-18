@@ -45,4 +45,7 @@ services:
   # Redis (message broker)
   - type: redis
     name: geniusguard-redis
-    plan: free  # Upgrade for production
+    plan: free
+    ipAllowList:
+      - source: 0.0.0.0/0  # Allow all connections (for development)
+        description: Allow all IPs
