@@ -257,9 +257,15 @@ SOCIALACCOUNT_PROVIDERS = {
 
 # geniusgaurd/settings.py
 
-# Celery Configuration
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+# Celery Configuration - Choose one:
+# For Render deployment:
+CELERY_BROKER_URL = 'redis://red-d7lu492pmmbs73fqtu10:6379'
+CELERY_RESULT_BACKEND = 'redis://red-d7lu492pmmbs73fqtu10:6379'
+
+# For local testing (comment above, uncomment below):
+# CELERY_BROKER_URL = 'redis://localhost:6379'
+# CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
