@@ -89,10 +89,21 @@ WSGI_APPLICATION = 'geniusgaurd.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'genius_gaurd',
+        'USER': 'genius_gaurd_user',
+        'PASSWORD': 'EN8aGVkpOJgmDpwOFlq9dugJNfwsIKTv',
+        'HOST': 'dpg-d7lv4aqpmmbs73frj5u0-a',
+        'PORT': '5432',
     }
 }
 
