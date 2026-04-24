@@ -102,11 +102,10 @@ DATABASES = {
         'NAME': 'genius_gaurd',
         'USER': 'genius_gaurd_user',
         'PASSWORD': 'EN8aGVkpOJgmDpwOFlq9dugJNfwsIKTv',
-        'HOST': 'dpg-d7lv4aqpmmbs73frj5u0-a',
+        'HOST': 'dpg-d7lv4aqpmmbs73frj5u0-a',  # Added .oregon-postgres.render.com
         'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
